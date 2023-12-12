@@ -20,6 +20,13 @@ pip install -r requirements.txt
 ## Other software requirements
 You will need to install the latest version of Npcap. Go here for installation instructions: https://npcap.com
 
+## API Requirements
+You will need to register for a free account with API Ninja https://api-ninjas.com
+Then you will create a file at the root of the project folder named constants.py with the following contents:
+```
+API_NINJA_KEY = 'INSERT YOUR API KEY HERE'
+```
+
 ## Usage
 Use the following command in a terminal window to initialize the database:
 ```
