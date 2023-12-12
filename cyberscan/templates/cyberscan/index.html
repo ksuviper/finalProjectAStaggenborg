@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h2>{% block title %} Cyberscan Tools {% endblock %}</h2>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <div>Your IP: {{ user_ip }}</div><div>Your ISP: {{ isp }}</div>
+            <a href="{% url "cyberscan:scan" %}" class="btn btn-lg btn-warning me-1"><img src="/static/cyberscan/images/gear-24px.png"> cyberScanner</a>
+            <a href="{% url "cyberscan:trace" %}" class="btn btn-lg btn-warning me-1"><img src="/static/cyberscan/images/gear-24px.png"> cyberTracer</a>
+        </div>
+    </div>
+{% endblock %}
