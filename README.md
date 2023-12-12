@@ -17,6 +17,9 @@ Please run the following:
 pip install -r requirements.txt
 ```
 
+## Other software requirements
+You will need to install the latest version of Npcap. Go here for installation instructions: https://npcap.com
+
 ## Usage
 Use the following command in a terminal window to initialize the database:
 ```
