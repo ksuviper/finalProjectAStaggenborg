@@ -4,20 +4,19 @@ from django.db import models
 # Create your models here.
 class Scan(models.Model):
     ScanDate = models.DateTimeField()
-    NetworkIPStart = models.GenericIPAddressField(protocol="IPv4")
-    NetworkIPEnd = models.GenericIPAddressField(protocol="IPv4")
-    PortStart = models.PositiveSmallIntegerField()
-    PortEnd = models.PositiveSmallIntegerField()
+    NetworkIPs = models.CharField(max_length=100)
+    Ports = models.CharField(max_length=20)
     UserIP = models.GenericIPAddressField(protocol="IPv4")
 
     def __str__(self):
-        return self.NetworkIPStart + "-" + self.NetworkIPEnd
+        return self.NetworkIPs
 
 
 class ScanResult(models.Model):
     Scan = models.ManyToManyField(Scan)
     IPAddress = models.GenericIPAddressField(protocol="IPv4")
-    ResponseTime = models.PositiveSmallIntegerField()
+    Hostname = models.CharField(max_length=100)
+    Status = models.CharField(max_length=20)
 
     def __str__(self):
         return self.IPAddress
@@ -26,7 +25,7 @@ class ScanResult(models.Model):
 class PortsScanned(models.Model):
     ScanResult = models.ManyToManyField(ScanResult)
     Port = models.PositiveSmallIntegerField()
-    Status = models.BooleanField()
+    Status = models.CharField(max_length=20)
 
     def __str__(self):
         return self.Port

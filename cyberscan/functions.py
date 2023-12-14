@@ -4,6 +4,7 @@ from scapy.layers.inet import traceroute
 from constants import *
 from .models import Scan, ScanResult, Trace, TraceResult
 import ipaddress
+import nmapthon2 as nm2
 
 
 def is_ipv4(ip_addr):
@@ -104,3 +105,29 @@ def run_traceroute(ip_addr, save_result):
             t.traceresult_set.create(Hop=h, HopIP=hop_ip, HopReply=hop_reply)
 
     return hops
+
+
+def run_network_scan(network, ports="1-1024", scanner_args="-sS -T4", save_result=""):
+    sc = nm2.NmapScanner()
+    result = sc.scan(network, ports=ports, arguments=scanner_args)
+    # print(result)
+    if save_result == "on":
+        """save scan results"""
+        s = Scan(NetworkIPs=network, Ports=ports, ScanDate=datetime.now(), UserIP=get_my_ip())
+        s.save()
+
+        for host in result:
+            # Get state, reason and hostnames
+            hname = ""
+            for hostname in host.hostnames():
+                hname = hostname
+            print(host.ip, hname)
+            p = s.scanresult_set.create(IPAddress=host.ip, Hostname=hname, Status=host.state)
+
+            # Get scanned protocols
+            for port in host:
+                # Get scanned ports
+                print(port.number, port.state)
+                p.portsscanned_set.create(Port=port.number, Status=port.state)
+
+    return result

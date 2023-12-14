@@ -45,7 +45,7 @@ def trace(request):
     else:
         """trace page"""
         """list traces that have been saved from the current user's IP"""
-        traces = Trace.objects.filter(UserIP__exact=get_my_ip()).values()
+        traces = Trace.objects.filter(UserIP__exact=get_my_ip()).values_list()
         userip = get_my_ip()
 
         return render(request, "cyberscan/trace.html", {"tr_list": traces, "userip": userip})
@@ -53,20 +53,29 @@ def trace(request):
 
 def scan(request):
     """scan page"""
+    if request.GET.get("id") is not None:
+        """pull up saved trace results"""
+        pk_id = request.GET.get("id")
+        sc = get_object_or_404(Scan, pk=pk_id)
+        network = sc.NetworkIPs
+        ports = sc.Ports
+        loadedscan = sc.scanresult_set.values()
 
-    return render(request, "cyberscan/scan.html")
+        print(loadedscan)
+        return render(request, "cyberscan/scanresult2.html", {"network": network, "ports": ports, "loadedscan": loadedscan})
+    elif request.GET.get("network") is not None:
+        """start new scan"""
+        network = request.GET.get("network")
+        ports = request.GET.get("ports")
+        saveresult = request.GET.get("save_results")
 
+        scan_results = run_network_scan(network, ports=ports, save_result=saveresult)
+        return render(request, "cyberscan/scanresult.html", {"network": network, "ports": ports, "scan_results": scan_results})
+    else:
+        """scan page"""
+        """list scans that have been saved from the current user's IP"""
+        scans = Scan.objects.filter(UserIP__exact=get_my_ip()).values_list()
+        userip = get_my_ip()
 
-def traceresult(request, trace_id):
-    """trace result page"""
-    tr = get_object_or_404(Trace, pk=trace_id)
-
-    return render(request, "cyberscan/traceresult.html", {"traceresult": tr})
-
-
-def scanresult(request, scan_id):
-    """scan result page"""
-    s = get_object_or_404(Scan, pk=scan_id)
-    return render(request, "cyberscan/scanresult.html", {"scanresult": s})
-
+    return render(request, "cyberscan/scan.html", {"userip": userip, "scans": scans})
 

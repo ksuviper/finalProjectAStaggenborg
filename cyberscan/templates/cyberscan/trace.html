@@ -4,11 +4,12 @@
     <h2>{% block title %} cyberTrace {% endblock %}</h2>
 {% endblock %}
 {% block content %}
-    <div class="container">
+    <div class="container w-50">
         <div>cyberTrace will perform a traceroute to the specified IP or domain and display the results on a map of the world so you can see where your packets are traveling.</div>
         <form method="get">
-            <div class="input-group mb-2">
-                <input class="form-control" type="text" placeholder="IP Address" aria-label="IP Address" name="ipaddr" value="{{ ipaddr }}" required>
+            <div class="input-group my-2">
+                <span class="input-group-text">IP Address / Domain</span>
+                <input class="form-control" type="text" placeholder="8.8.8.8, google.com" aria-label="IP Address" name="ipaddr" value="{{ ipaddr }}" required>
                 <button class="btn btn-outline-success text-nowrap" type="submit">Start Trace</button>
             </div>
             <div class="form-check form-switch">
