@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 
 {% block header %}
+    <script type="application/javascript">
+        function showWait() {
+            var waitModal = new bootstrap.Modal(document.getElementById('staticBackdropWait'), { keyboard: false });
+            waitModal.show();
+        }
+    </script>
     <h2>{% block title %} cyberScanner {% endblock %}</h2>
 {% endblock %}
 {% block content %}
     <div class="container w-50">
-        <form method="get">
+        <form method="get" onsubmit="showWait()">
             <div class="input-group my-2">
                 <span class="input-group-text">Network / IPs</span>
                 <input class="form-control" type="text" placeholder="192.168.1.1, 192.168.1-100, 192.168.1.0/24, [192.168.1.1, 127.0.0.1]" aria-label="Network" name="network" required>
@@ -13,7 +19,7 @@
             <div class="input-group my-2">
                 <span class="input-group-text">Ports</span>
                 <input class="form-control" type="text" placeholder="1, 1-1024, [1,20]" aria-label="Ports" name="ports" required>
-                <button class="btn btn-outline-danger text-nowrap" type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdropWait">Start Scan</button>
+                <button class="btn btn-outline-danger text-nowrap" type="submit">Start Scan</button>
             </div>
             <div class="form-check form-switch my-2">
               {% if saveresults == "on" %}
