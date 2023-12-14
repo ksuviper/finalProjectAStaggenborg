@@ -43,10 +43,9 @@ class Trace(models.Model):
 
 class TraceResult(models.Model):
     Trace = models.ManyToManyField(Trace)
+    Hop = models.PositiveSmallIntegerField()
     HopIP = models.GenericIPAddressField(protocol="IPv4")
     HopReply = models.PositiveSmallIntegerField()
 
     def __str__(self):
         return self.HopIP
-
-

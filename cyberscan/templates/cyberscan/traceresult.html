@@ -1,11 +1,37 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h2>{% block title %}{{ traceresult.IPAddress }} {% endblock %}</h2>
+    <h2>{% block title %}cyberTrace results for {{ ipaddr }} {% endblock %}<a class="btn btn-outline-success ms-3" href="{% url "cyberscan:trace" %}">Start New Trace</a></h2>
 {% endblock %}
 {% block content %}
     <div class="container">
-
+        <div class="p-3">
+                <div class="row">
+                    <div class="col-1">Hop</div><div class="col-3">Hop IP</div><div class="col-3">Location</div>
+                </div>
+              {% for hop, values in hops.items %}
+                    <div class="row">
+                        <div class="col-1">{{ hop }}</div><div class="col-3">{{ values.0 }}</div><div class="col-auto">{{ values.2 }}</div>
+                    </div>
+              {% endfor %}
+          </div>
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#resultsModal">Show Map</button>
+    </div>
+    <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="resultsModalLabel">Trace Map for {{ ipaddr }}</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+                Map coming soon...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
 
 {% endblock %}

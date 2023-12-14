@@ -13,12 +13,19 @@
             </div>
             <div class="form-check form-switch">
               {% if saveresults == "on" %}
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheck" name="swSave" checked>
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheck" name="save_results" checked>
               {% else %}
-                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheck" name="swSave">
+                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheck" name="save_results">
               {% endif %}
               <label class="form-check-label" for="flexSwitchCheck">Save Results</label>
             </div>
+            <div class="p-3">Recent saved traces from your IP: ({{ userip }})
+            {% for id, trdate, ip, userip in tr_list.values_list %}
+                <div class="p-1">
+                    <a href="?id={{ id }}">{{ ip }}</a>
+                </div>
+            {% endfor %}
+        </div>
         </form>
     </div>
 
