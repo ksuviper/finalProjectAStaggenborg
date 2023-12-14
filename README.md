@@ -22,11 +22,18 @@ You will need to install the latest version of Npcap. This is required for scapy
 Go here for installation instructions: https://npcap.com
 
 ## API Requirements
-You will need to signup for a free account to get access to the Geolocation database. 
+1. You will need to install the latest version of NMAP.  The installer can be found here: https://nmap.org/download 
+2. The NMAP install folder will also need to be added to the system path variable 
+3. You will need to signup for a free account to get access to the Geolocation database. 
 https://dev.maxmind.com/geoip/geolite2-free-geolocation-data
-
-Once you sign up and are able to login you will need to download a copy of the city database and extract it to the root
+4. Once you sign up and are able to login, you will need to download a copy of the city database and extract it to the root
 of your project.  The database filename should be **GeoLite2-City.mmdb**
+5. You will need to register for a free account with API Ninja https://api-ninjas.com
+Then you will create a file at the root of the project folder named constants.py with the following contents:
+```
+API_NINJA_KEY = 'INSERT YOUR API KEY HERE'
+```
+
 
 ## Usage
 Use the following command in a terminal window to initialize the database:
