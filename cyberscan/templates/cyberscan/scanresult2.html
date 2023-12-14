@@ -10,7 +10,10 @@
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    {{ host.IPAddress }} ( {{ host.Hostname }} )
+                    {{ host.IPAddress }}
+                      {% if not host.Hostname == "" %}
+                          ( {{ host.Hostname }} )
+                        {% endif %}
                   </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
@@ -25,13 +28,12 @@
                                 <h4>Port Scan Results</h4>
                             </div>
                         </div>
-                          {% for port in host.PortsScanned %}
+                          {% for port in host.portsscanned_set.values %}
                         <div class="row p-2">
-                            <div class="col">
-                                {{ port }}
+                            <div class="col-2">
                                 Port: {{ port.Port }}
                             </div>
-                            <div class="col">
+                            <div class="col-2">
                               State: {{ port.Status }}
                             </div>
                           </div>

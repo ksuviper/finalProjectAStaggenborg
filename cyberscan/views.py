@@ -59,7 +59,9 @@ def scan(request):
         sc = get_object_or_404(Scan, pk=pk_id)
         network = sc.NetworkIPs
         ports = sc.Ports
-        loadedscan = sc.scanresult_set.values()
+        loadedscan = sc.scanresult_set.all()
+        for s in loadedscan:
+            p = s.portsscanned_set.values()
 
         print(loadedscan)
         return render(request, "cyberscan/scanresult2.html", {"network": network, "ports": ports, "loadedscan": loadedscan})

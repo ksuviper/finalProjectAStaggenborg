@@ -12,7 +12,9 @@
                   <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     {{ host.ip }}
                       {% for hostname in host.hostnames %}
-                        ( {{ hostname }} )
+                        {% if not hostname == "" %}
+                          ( {{ hostname }} )
+                        {% endif %}
                     {% endfor %}
                   </button>
                 </h2>
@@ -30,10 +32,10 @@
                         </div>
                           {% for port in host %}
                         <div class="row p-2">
-                            <div class="col">
+                            <div class="col-2">
                                 Port: {{ port.number }}
                             </div>
-                            <div class="col">
+                            <div class="col-2">
                               State: {{ port.state }}
                             </div>
                           </div>
