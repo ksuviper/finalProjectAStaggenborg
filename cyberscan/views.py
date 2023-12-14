@@ -34,6 +34,7 @@ def trace(request):
         conf.geoip_city = "GeoLite2-City.mmdb"
 
         tr = run_traceroute(ipaddr, saveresult)
+
         hops = {}
         for h in tr:
             """add location data to trace data dictionary"""
@@ -60,7 +61,7 @@ def scan(request):
         network = sc.NetworkIPs
         ports = sc.Ports
         loadedscan = sc.scanresult_set.all()
- 
+
         return render(request, "cyberscan/scanresult2.html", {"network": network, "ports": ports, "loadedscan": loadedscan})
     elif request.GET.get("network") is not None:
         """start new scan"""
