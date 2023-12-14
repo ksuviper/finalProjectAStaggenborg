@@ -18,14 +18,15 @@ pip install -r requirements.txt
 ```
 
 ## Other software requirements
-You will need to install the latest version of Npcap. Go here for installation instructions: https://npcap.com
+You will need to install the latest version of Npcap. This is required for scapy functionality. 
+Go here for installation instructions: https://npcap.com
 
 ## API Requirements
-You will need to register for a free account with API Ninja https://api-ninjas.com
-Then you will create a file at the root of the project folder named constants.py with the following contents:
-```
-API_NINJA_KEY = 'INSERT YOUR API KEY HERE'
-```
+You will need to signup for a free account to get access to the Geolocation database. 
+https://dev.maxmind.com/geoip/geolite2-free-geolocation-data
+
+Once you sign up and are able to login you will need to download a copy of the city database and extract it to the root
+of your project.  The database filename should be **GeoLite2-City.mmdb**
 
 ## Usage
 Use the following command in a terminal window to initialize the database:
