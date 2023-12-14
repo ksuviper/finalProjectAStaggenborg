@@ -60,10 +60,7 @@ def scan(request):
         network = sc.NetworkIPs
         ports = sc.Ports
         loadedscan = sc.scanresult_set.all()
-        for s in loadedscan:
-            p = s.portsscanned_set.values()
-
-        print(loadedscan)
+ 
         return render(request, "cyberscan/scanresult2.html", {"network": network, "ports": ports, "loadedscan": loadedscan})
     elif request.GET.get("network") is not None:
         """start new scan"""
