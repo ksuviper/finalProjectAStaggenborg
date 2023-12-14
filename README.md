@@ -6,7 +6,7 @@ Adam Staggenborg
 
 ## Description
 This project will be using Django to create a website that will have tools to scan IP addresses with NMAP
-and perform a visual traceroute to IP addresses.
+and perform a traceroute with geolocation data.
 
 Data will be stored in a Sqlite3 database.
 
